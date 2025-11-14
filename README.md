@@ -1,5 +1,10 @@
 # helium-linux
-Portable Linux (`.AppImage`) packaging for [Helium](https://github.com/imputnet/helium).
+Linux packaging for [Helium](https://github.com/imputnet/helium) - Available as AppImage, RPM, and tar.xz.
+
+## Documentation
+
+- [Fedora Packaging and Distribution](docs/FEDORA_PACKAGING.md) - RPM packages and installation guide for Fedora users
+- [GitHub Releases Implementation](docs/GITHUB_RELEASES.md) - Technical details about the release process
 
 ## Credits
 This repo is based on
@@ -32,7 +37,9 @@ Running `scripts/build.sh` directly will not work unless you're running a Debian
 ### Packaging
 After building, run `scripts/package.sh`. Alternatively, you can run `package/docker-package.sh` to build inside a Docker image. If you would like to sign the resulting AppImage, you can pass the `--sign` argument.
 
-Either of these scripts will create `tar.xz` and `AppImage` files under `build/`.
+These scripts will create `tar.xz` and `AppImage` files under `build/release/`.
+
+To also build RPM packages, run `package/docker-build-rpm.sh` after packaging. This will create RPM files in `build/release/`.
 
 ### Development
 By default, the build script uses tarball. If you need to use a source tree clone, you can run `scripts/docker-build.sh -c` instead. This may be useful if a tarball for a release isn't available yet.
