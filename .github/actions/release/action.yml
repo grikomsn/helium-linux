@@ -25,6 +25,13 @@ runs:
         path: ./release/
         merge-multiple: true
 
+    - name: Download RPM artifacts
+      uses: actions/download-artifact@v4
+      with:
+        pattern: helium-*-rpm
+        path: ./release/
+        merge-multiple: true
+
     - name: List release files
       shell: bash
       run: ls -la release/
@@ -33,7 +40,7 @@ runs:
       shell: bash
       run: |
         cd release/
-        sha256sum helium-*.AppImage helium-*.AppImage.zsync helium-*_linux.tar.xz > SHA256SUMS
+        sha256sum helium-*.AppImage helium-*.AppImage.zsync helium-*_linux.tar.xz helium-*.rpm > SHA256SUMS
         cat SHA256SUMS
 
     - name: Create Release
@@ -46,4 +53,5 @@ runs:
           release/helium-*.AppImage
           release/helium-*.AppImage.zsync
           release/helium-*_linux.tar.xz
+          release/helium-*.rpm
           release/SHA256SUMS

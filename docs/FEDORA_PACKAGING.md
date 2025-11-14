@@ -2,19 +2,63 @@
 
 ## Overview
 
-This document outlines the options for distributing Helium on Fedora systems and explains the current approach.
+This document outlines the distribution options for Helium on Fedora systems.
 
-## Current Distribution Method
+## Current Distribution Methods
 
-Helium for Linux is currently distributed as:
+Helium for Linux is distributed in multiple formats:
+- **RPM packages** - Native Fedora packages for easy installation via dnf
 - **AppImage** - Portable, self-contained format that works across all Linux distributions
 - **tar.xz archives** - Traditional tarball format for manual installation
 
-Both formats are built automatically via GitHub Actions and published to [GitHub Releases](https://github.com/imputnet/helium-linux/releases).
+All formats are built automatically via GitHub Actions and published to [GitHub Releases](https://github.com/imputnet/helium-linux/releases).
 
-## Fedora Distribution Options Evaluated
+## Installation Options
 
-### 1. Direct AppImage Distribution (Current - Recommended)
+### 1. RPM Package Installation (Recommended for Fedora)
+
+RPM packages provide the best integration with Fedora systems.
+
+**Pros:**
+- ✅ Native package manager integration
+- ✅ Automatic desktop integration
+- ✅ Easy installation and updates via dnf
+- ✅ System-wide installation
+- ✅ Familiar for Fedora users
+
+**Installation:**
+```bash
+# Download the RPM package
+wget https://github.com/imputnet/helium-linux/releases/download/VERSION/helium-VERSION-1.fc*.x86_64.rpm
+
+# Install with dnf
+sudo dnf install ./helium-VERSION-1.fc*.x86_64.rpm
+
+# Launch from application menu or terminal
+helium
+```
+
+**Updating:**
+```bash
+# Download new version
+wget https://github.com/imputnet/helium-linux/releases/download/NEW_VERSION/helium-NEW_VERSION-1.fc*.x86_64.rpm
+
+# Update with dnf
+sudo dnf update ./helium-NEW_VERSION-1.fc*.x86_64.rpm
+```
+
+**Uninstalling:**
+```bash
+sudo dnf remove helium
+```
+
+### 2. Direct AppImage Distribution (Alternative)
+
+AppImage is recommended for users who want a portable installation or are using multiple Linux distributions.
+
+### 2. Direct AppImage Distribution (Alternative)
+
+AppImage is recommended for users who want a portable installation or are using multiple Linux distributions.
 
 **Pros:**
 - ✅ Works on Fedora and all other Linux distributions
@@ -22,10 +66,9 @@ Both formats are built automatically via GitHub Actions and published to [GitHub
 - ✅ Users don't need root access
 - ✅ Easy to update and remove
 - ✅ Self-contained with all dependencies
-- ✅ Already implemented and working
 
 **Cons:**
-- ⚠️ Less integrated with Fedora's package manager (dnf)
+- ⚠️ Less integrated with Fedora's package manager
 - ⚠️ Desktop integration requires manual setup or tools like AppImageLauncher
 
 **How to use on Fedora:**
@@ -45,88 +88,40 @@ For better desktop integration, Fedora users can install AppImageLauncher:
 sudo dnf install appimagelauncher
 ```
 
-### 2. RPM Package Wrapping AppImage (Not Recommended)
+## RPM Package Details
 
-Some projects create RPM packages that simply wrap the AppImage for installation via dnf.
+### Architecture Support
 
-**Pros:**
-- Desktop integration is automatic
-- Familiar installation method for Fedora users
+RPM packages are provided for:
+- **x86_64** (Intel/AMD 64-bit)
+- **aarch64** (ARM 64-bit)
 
-**Cons:**
-- ❌ Negates the portability benefits of AppImage
-- ❌ Adds packaging complexity and maintenance burden
-- ❌ Against AppImage best practices
-- ❌ Requires separate packaging workflow
-- ❌ Duplicates effort without significant benefit
+### Dependencies
 
-**Conclusion:** Not recommended. Fedora users who want AppImages can use them directly.
+The RPM package requires the following system packages:
+- gtk3
+- nss
+- alsa-lib
+- libXScrnSaver
+- liberation-fonts
+- at-spi2-atk
+- libdrm
+- mesa-libgbm
 
-### 3. Native Fedora RPM via Copr (Future Consideration)
+These are automatically installed by dnf when you install the Helium RPM.
 
-Building native RPM packages from source and hosting them in a Fedora Copr repository.
+### Package Contents
 
-**Pros:**
-- ✅ Full Fedora integration
-- ✅ Automatic updates via dnf
-- ✅ Familiar for Fedora users
-- ✅ Can be automated with GitHub Actions
+The RPM package installs:
+- Browser binary and libraries: `/usr/lib64/helium/`
+- Launcher script: `/usr/bin/helium`
+- Desktop file: `/usr/share/applications/helium.desktop`
+- Application icon: `/usr/share/icons/hicolor/256x256/apps/helium.png`
 
-**Cons:**
-- ❌ Requires maintaining separate build pipeline
-- ❌ Need to build for multiple Fedora versions
-- ❌ Chromium builds are extremely resource-intensive
-- ❌ Significant ongoing maintenance effort
-- ❌ Copr has resource limits for large packages
+## Building RPM Packages Locally
 
-**Implementation approach (if pursued):**
-1. Create RPM spec file for native build
-2. Set up Fedora Copr project
-3. Use [copr-build GitHub Action](https://github.com/marketplace/actions/copr-build)
-4. Automate builds on new releases
+If you want to build RPM packages yourself:
 
-**Conclusion:** Could be valuable for Fedora-native users but requires significant resources. Consider if there's sufficient demand from the Fedora community.
-
-## Recommendation
-
-**Continue with current approach: Direct AppImage distribution via GitHub Releases**
-
-This is the most practical solution because:
-1. Already implemented and working well
-2. Provides maximum compatibility across distributions
-3. Minimal maintenance burden
-4. Users who want native Fedora packages can create them locally if needed
-
-## For Fedora Users
-
-### Using AppImage on Fedora
-
-The AppImage format is officially supported on Fedora. See the [Fedora AppImage Wiki](https://fedoraproject.org/wiki/AppImage) for details.
-
-**Quick start:**
-1. Download the appropriate AppImage for your architecture (x86_64 or arm64)
-2. Make it executable: `chmod +x helium-*.AppImage`
-3. Run it: `./helium-*.AppImage`
-
-**For desktop integration:**
-Install AppImageLauncher which provides automatic integration:
-```bash
-sudo dnf install appimagelauncher
-```
-
-After installing AppImageLauncher, when you run an AppImage for the first time, you'll be prompted to integrate it into your system. This will:
-- Add Helium to your application menu
-- Associate it with supported file types
-- Enable easy updates and removal
-
-### Building Native RPM Locally (Advanced)
-
-If you prefer a native RPM package, you can build it locally. This requires:
-1. A powerful machine (Chromium builds need significant resources)
-2. Several hours of build time
-3. Familiarity with RPM packaging
-
-The build process is the same as documented in the main README:
 ```bash
 # Clone the repository
 git clone --recursive https://github.com/imputnet/helium-linux.git
@@ -135,11 +130,20 @@ cd helium-linux
 # Build using Docker
 ./scripts/docker-build.sh
 
-# Package
+# Package (creates tar.xz and AppImage)
 ./scripts/package.sh
+
+# Build RPM
+./package/docker-build-rpm.sh
 ```
 
-Then create an RPM spec file that packages the built binaries. Contact the maintainers if you need assistance with this approach.
+The RPM file will be created in `build/release/`.
+
+## Removed Sections
+
+### RPM Package Wrapping AppImage (Previously Not Recommended)
+
+This section has been removed as we now provide native RPM packages built from the tarball distribution. The RPM packages provide proper system integration without the limitations of wrapped AppImages.
 
 ## Future Enhancements
 

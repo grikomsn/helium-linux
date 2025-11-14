@@ -18,7 +18,7 @@ Verifying downloads ensures that:
 After downloading Helium and the `SHA256SUMS` file from a release:
 
 ```bash
-# Verify a specific file
+# Verify a specific file (AppImage, RPM, or tar.xz)
 sha256sum -c SHA256SUMS --ignore-missing
 
 # Or verify all files (if you downloaded all of them)
@@ -28,6 +28,7 @@ sha256sum -c SHA256SUMS
 **Expected output:**
 ```
 helium-0.6.5.1-x86_64.AppImage: OK
+helium-0.6.5.1-1.fc40.x86_64.rpm: OK
 ```
 
 ### Manual Verification
@@ -37,14 +38,20 @@ If you prefer to verify manually:
 ```bash
 # Generate the checksum of your downloaded file
 sha256sum helium-*.AppImage
+# or
+sha256sum helium-*.rpm
 
 # Compare the output with the value in SHA256SUMS
 cat SHA256SUMS | grep AppImage
+# or
+cat SHA256SUMS | grep rpm
 ```
 
 The two checksums should match exactly.
 
-## Example
+## Examples
+
+### Verifying AppImage
 
 ```bash
 # Download files
@@ -58,6 +65,22 @@ sha256sum -c SHA256SUMS --ignore-missing
 **Expected output:**
 ```
 helium-0.6.5.1-x86_64.AppImage: OK
+```
+
+### Verifying RPM Package
+
+```bash
+# Download files
+wget https://github.com/imputnet/helium-linux/releases/download/0.6.5.1/helium-0.6.5.1-1.fc40.x86_64.rpm
+wget https://github.com/imputnet/helium-linux/releases/download/0.6.5.1/SHA256SUMS
+
+# Verify the download
+sha256sum -c SHA256SUMS --ignore-missing
+```
+
+**Expected output:**
+```
+helium-0.6.5.1-1.fc40.x86_64.rpm: OK
 ```
 
 ## What If Verification Fails?
