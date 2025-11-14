@@ -59,17 +59,18 @@ The research and planning phase for creating Fedora distribution packages has be
 
 ### Distribution Options Evaluated
 
-1. **Fedora Copr** (Recommended)
+1. **Fedora Copr** (Selected)
+   - Repository: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
    - Community build system with free hosting
    - Automated builds for multiple Fedora versions
-   - Easy user installation via `dnf copr enable`
+   - Easy user installation via `dnf copr enable griko/helium-browser`
    - No official approval required
-   - Best for community packages
+   - Status: ✅ Repository created and ready
 
 2. **GitHub Releases** (Alternative)
    - Simple direct download distribution
    - No external dependencies
-   - Good for initial testing
+   - Good for supplementary distribution
    - Manual installation required
 
 3. **Official Fedora Repositories** (Future Goal)
@@ -132,6 +133,12 @@ The research and planning phase for creating Fedora distribution packages has be
 - [ ] Create first official RPM release
 - [ ] Document user installation instructions
 
+### Phase 3: Distribution (In Progress)
+- [x] Copr repository created: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+- [ ] Upload packages to Copr
+- [ ] Configure automated builds
+- [ ] Document user installation instructions
+
 ### Phase 4: Maintenance (Future Work)
 - [ ] Automate RPM builds for releases
 - [ ] Support multiple Fedora versions
@@ -185,18 +192,19 @@ The research and planning phase for creating Fedora distribution packages has be
 1. Test the build-rpm.sh script with real Helium build output
 2. Validate RPM installation on clean Fedora systems
 3. Address any issues discovered during testing
-4. Choose distribution method based on project needs
+4. Upload packages to Copr repository
 
 ### Short-term Goals
 1. Create first official RPM release
-2. Distribute via GitHub releases for testing
-3. Gather user feedback
-4. Iterate on spec file if needed
+2. Upload to Copr: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+3. Configure automated builds from GitHub releases
+4. Update main README with installation instructions
+5. Gather user feedback
 
 ### Long-term Goals
-1. Set up Fedora Copr repository
-2. Automate RPM builds for releases
-3. Support multiple architectures (x86_64, aarch64)
+1. Automate RPM builds for new releases
+2. Support multiple architectures (x86_64, aarch64)
+3. Add RPM signing with GPG key
 4. Consider official Fedora repository inclusion
 
 ## Files Changed
@@ -221,8 +229,9 @@ The research and planning phase for Fedora distribution packages is complete. Al
 3. ✅ Automated build infrastructure
 4. ✅ Multiple levels of documentation
 5. ✅ Clear roadmap for implementation and testing
+6. ✅ Fedora Copr repository created: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
 
-The foundation is solid and ready for the next phase: testing and distribution.
+The foundation is solid and ready for the next phase: testing, package upload, and distribution.
 
 ---
 

@@ -40,11 +40,28 @@ The resulting RPM will be in `~/rpmbuild/RPMS/x86_64/` (or appropriate architect
 sudo dnf install ~/rpmbuild/RPMS/x86_64/helium-*.rpm
 ```
 
-## Distribution Options
+## Distribution
 
-### Option 1: GitHub Releases (Recommended for now)
+### Fedora Copr (Primary Method)
 
-Upload the built RPM to GitHub releases alongside AppImage:
+Helium is available via Fedora Copr at: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+
+**For Users - Installation:**
+```bash
+sudo dnf copr enable griko/helium-browser
+sudo dnf install helium
+```
+
+**For Maintainers - Uploading to Copr:**
+
+1. Build the RPM locally (see "Building the RPM" above)
+2. Log in to Copr: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+3. Upload the built SRPM or configure automated builds
+4. Copr will build for all enabled Fedora versions and architectures
+
+### Alternative: GitHub Releases
+
+RPMs can also be distributed via GitHub releases alongside AppImage:
 
 1. Build RPM for target Fedora versions
 2. Upload to GitHub releases
@@ -53,22 +70,7 @@ Upload the built RPM to GitHub releases alongside AppImage:
    sudo dnf install ./helium-0.6.5.1-1.fc40.x86_64.rpm
    ```
 
-### Option 2: Fedora Copr (Future)
-
-Fedora Copr provides a community package repository:
-
-1. Create Fedora Account (https://accounts.fedoraproject.org/)
-2. Create new Copr project at https://copr.fedorainfracloud.org/
-3. Upload spec file and configure source
-4. Enable automated builds
-
-Users can then install via:
-```bash
-sudo dnf copr enable username/helium
-sudo dnf install helium
-```
-
-### Option 3: Official Fedora Repositories (Long-term)
+### Future: Official Fedora Repositories
 
 For inclusion in official Fedora repositories:
 
@@ -120,7 +122,8 @@ helium --version
 ## Future Improvements
 
 - [ ] Integrate full build process into spec file (may not be practical)
-- [ ] Set up Copr repository for automated builds
+- [x] Set up Copr repository for automated builds (https://copr.fedorainfracloud.org/coprs/griko/helium-browser/)
+- [ ] Configure automated builds from GitHub releases
 - [ ] Add SELinux policy if needed
 - [ ] Support multiple Fedora versions (38, 39, 40, 41)
 - [ ] Add RPM signing with GPG key

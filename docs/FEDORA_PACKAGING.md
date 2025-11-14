@@ -16,7 +16,8 @@ Helium is currently distributed as an AppImage for portability across Linux dist
 - **User Familiarity**: Fedora users are accustomed to installing software via RPM/DNF
 
 ### Distribution Options
-1. **Fedora Copr**: Community-driven build system and repository for custom RPM packages
+1. **Fedora Copr** (Selected): Community-driven build system and repository for custom RPM packages
+   - Repository: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
    - No official Fedora approval required
    - Automated builds for multiple Fedora versions and architectures
    - Easy for users to enable and use
@@ -123,16 +124,22 @@ Create `fedora/build-rpm.sh`:
 
 ### Phase 4: Distribution Setup
 
-Choose distribution method:
+Fedora Copr repository has been set up at: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
 
-**Option A: Fedora Copr** (Recommended)
-1. Create Fedora Account System (FAS) account
-2. Create new Copr project for Helium
-3. Upload spec file and sources
+**Copr Setup (Completed):**
+1. ✅ Fedora Account System (FAS) account created
+2. ✅ Copr project created for Helium
+3. Upload spec file and sources to Copr
 4. Configure automated builds from GitHub
 5. Document installation instructions for users
 
-**Option B: GitHub Releases**
+**Installation for users:**
+```bash
+sudo dnf copr enable griko/helium-browser
+sudo dnf install helium
+```
+
+**Alternative: GitHub Releases**
 1. Build RPMs for multiple Fedora versions (38, 39, 40, 41)
 2. Upload RPM files to GitHub releases alongside AppImage
 3. Provide installation instructions in README

@@ -32,20 +32,24 @@ These distribution methods work across all Linux distributions but lack native i
 
 ### 2. Distribution Options Analysis
 
-#### Option A: Fedora Copr (Recommended)
+#### Option A: Fedora Copr (Selected)
+**Repository:** https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+
 **Pros:**
 - Community-driven build and hosting infrastructure
 - Automated builds for multiple Fedora versions/architectures
-- Easy for users to enable and use (`dnf copr enable`)
+- Easy for users to enable and use (`dnf copr enable griko/helium-browser`)
 - No formal approval process required
 - Free hosting and bandwidth
 - Integrates with DNF/package management
 
 **Cons:**
 - Unofficial/community package (not in main Fedora repos)
-- Requires Fedora Account System account
+- Requires Fedora Account System account (already created)
 - Users must explicitly enable the Copr repository
 - No official Fedora support/backing
+
+**Status:** ✅ Repository created and ready for package uploads
 
 **Best For:** Community packages, experimental software, rapid iteration
 
@@ -150,14 +154,17 @@ These distribution methods work across all Linux distributions but lack native i
    - Test on both X11 and Wayland
    - Verify resource loading (icons, locales, etc.)
 
-### Phase 3: Distribution Setup (Future)
+### Phase 3: Distribution Setup
 
-**Recommended Approach: Fedora Copr**
+**Fedora Copr** (Repository Created)
 
-1. Create Fedora Account System (FAS) account
-2. Create Copr project at https://copr.fedorainfracloud.org/
-3. Configure project:
-   - Project name: `helium`
+Repository: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+
+**Setup Status:**
+1. ✅ Fedora Account System (FAS) account created
+2. ✅ Copr project created at https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+3. Configure project settings:
+   - Project name: `helium-browser`
    - Description: Privacy-focused Chromium-based browser
    - Instructions: Link to helium.computer
    - Enable for Fedora 38, 39, 40, 41
@@ -168,9 +175,9 @@ These distribution methods work across all Linux distributions but lack native i
    - Option B: Configure Git/GitHub integration for automatic builds
    - Option C: Use Copr CLI for scripted uploads
 
-5. Document installation for users:
+5. Installation for users:
    ```bash
-   sudo dnf copr enable [username]/helium
+   sudo dnf copr enable griko/helium-browser
    sudo dnf install helium
    ```
 
@@ -217,10 +224,11 @@ Update repository documentation:
 - [ ] Iterate on spec file based on testing
 
 ### Medium-term (Phase 3)
-- [ ] Decide between Copr and GitHub releases
-- [ ] Set up chosen distribution method
+- [x] Copr repository created: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+- [ ] Upload packages to Copr
+- [ ] Configure automated builds from GitHub
 - [ ] Create first official RPM release
-- [ ] Document installation for users
+- [ ] Document installation for users in main README
 
 ### Long-term (Phase 4+)
 - [ ] Consider official Fedora repository inclusion (requires significant effort)
@@ -269,26 +277,29 @@ Update repository documentation:
 
 ## Conclusion
 
-Fedora RPM packaging is feasible and beneficial for Helium. The recommended approach is:
+Fedora RPM packaging is feasible and beneficial for Helium. The selected approach is:
 
-1. **Start with GitHub releases** for initial testing
-2. **Move to Fedora Copr** once validated
+1. **Fedora Copr** as the primary distribution method
+   - Repository created: https://copr.fedorainfracloud.org/coprs/griko/helium-browser/
+   - Users can install via: `sudo dnf copr enable griko/helium-browser && sudo dnf install helium`
+2. **GitHub releases** as supplementary distribution
 3. **Consider official repos** as a long-term goal
 
 This approach provides:
-- Low barrier to entry
-- Gradual rollout with testing
-- Professional distribution method
+- Low barrier to entry for users
+- Professional distribution method via Copr
+- Automated builds and updates
 - Improved user experience for Fedora users
 
-The infrastructure created in Phase 1 provides a solid foundation for RPM packaging, with clear paths forward for testing and distribution.
+The infrastructure created in Phase 1 provides a solid foundation for RPM packaging, with the Copr repository ready for package uploads.
 
 ## Next Actions
 
 1. Test the build-rpm.sh script with actual build output
 2. Validate the generated RPM on clean Fedora installations
 3. Make any necessary adjustments based on testing
-4. Choose distribution method (Copr vs. GitHub)
+4. Upload packages to Copr repository
+5. Configure automated builds from GitHub releases
 5. Create first official RPM release
 6. Update documentation with installation instructions
 
