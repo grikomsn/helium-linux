@@ -34,6 +34,9 @@ After building, run `scripts/package.sh`. Alternatively, you can run `package/do
 
 Either of these scripts will create `tar.xz` and `AppImage` files under `build/`.
 
+### Fedora RPM Packages
+For Fedora users, RPM packages can be built using the spec file and build script in the `fedora/` directory. See [fedora/README.md](fedora/README.md) for details and [docs/FEDORA_PACKAGING_PLAN.md](docs/FEDORA_PACKAGING_PLAN.md) for the complete research and implementation plan.
+
 ### Development
 By default, the build script uses tarball. If you need to use a source tree clone, you can run `scripts/docker-build.sh -c` instead. This may be useful if a tarball for a release isn't available yet.
 
