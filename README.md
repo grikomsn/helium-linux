@@ -1,6 +1,11 @@
 # helium-linux
 Portable Linux (`.AppImage`) packaging for [Helium](https://github.com/imputnet/helium).
 
+## Documentation
+
+- [Fedora Packaging and Distribution](docs/FEDORA_PACKAGING.md) - Information for Fedora users and packaging options
+- [GitHub Releases Implementation](docs/GITHUB_RELEASES.md) - Technical details about the release process
+
 ## Credits
 This repo is based on
 [ungoogled-chromium-portablelinux](https://github.com/ungoogled-software/ungoogled-chromium-portablelinux)

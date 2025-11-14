@@ -29,6 +29,13 @@ runs:
       shell: bash
       run: ls -la release/
 
+    - name: Generate checksums
+      shell: bash
+      run: |
+        cd release/
+        sha256sum helium-*.AppImage helium-*.AppImage.zsync helium-*_linux.tar.xz > SHA256SUMS
+        cat SHA256SUMS
+
     - name: Create Release
       uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1, pinned commit hash
       with:
@@ -39,3 +46,4 @@ runs:
           release/helium-*.AppImage
           release/helium-*.AppImage.zsync
           release/helium-*_linux.tar.xz
+          release/SHA256SUMS
